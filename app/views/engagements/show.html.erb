@@ -20,17 +20,17 @@
 
     <dl>
       <dt>
-        Client
+        Client Name
       </dt>
       <dd>
-        <%= @the_engagement.client_id %>
+        <%= @the_engagement.client.client_name %>
       </dd>
 
       <dt>
-        User
+        Responsible User
       </dt>
       <dd>
-        <%= @the_engagement.user_id %>
+        <%= @the_engagement.user.username %>
       </dd>
 
       <dt>
@@ -75,19 +75,7 @@
 
     <form action="/modify_engagement/<%= @the_engagement.id %>"  method="post" >
       <div>
-        <label for="client_id_box">
-          Client
-        </label>
-
-        <input type="text" id="client_id_box" name="query_client_id" value="<%= @the_engagement.client_id %>">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_engagement.user_id %>">
+        <input type="hidden" id="client_id_box" name="query_client_id" value="<%= @the_engagement.client_id %>">
       </div>
 
       <div>
@@ -114,3 +102,122 @@
 </div>
 
 <hr>
+
+<div>
+    <h2>
+    Engagement Task List
+    </h2>
+  <div>
+    <table border = 1>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Engagement
+        </th>
+
+        <th>
+          Client
+        </th>
+
+        <th>
+          Task name
+        </th>
+
+        <th>
+          Task detail
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @the_engagement.internal_tasks.each do |an_internal_task| %>
+      <tr>
+        <td>
+          <%= an_internal_task.id %>
+        </td>
+
+        <td>
+          <%= an_internal_task.engagement_id %>
+        </td>
+
+        <td>
+          <%= an_internal_task.client_id %>
+        </td>
+
+        <td>
+          <%= an_internal_task.task_name %>
+        </td>
+
+        <td>
+          <%= an_internal_task.task_detail %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_internal_task.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_internal_task.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/internal_tasks/<%= an_internal_task.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new internal task to the engagement
+    </h2>
+
+    <form action="/insert_internal_task" method="post">
+      <div>
+        <input type="hidden" id="engagement_id_box" name="query_engagement_id" value="<%=@the_engagement.id%>">
+      </div>
+
+      <div>
+        <input type="hidden" id="client_id_box" name="query_client_id" value="<%= @the_engagement.client.id%>">
+      </div>
+
+      <div>
+        <label for="task_name_box">
+          Task name
+        </label>
+
+        <input type="text" id="task_name_box" name="query_task_name">
+      </div>
+
+      <div>
+        <label for="task_detail_box">
+          Task detail
+        </label>
+
+        <input type="text" id="task_detail_box" name="query_task_detail">
+      </div>
+
+      <button>
+        Create internal task
+      </button>
+    </form>
+  </div>
+</div>

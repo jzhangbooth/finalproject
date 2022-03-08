@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-
-
-
   # Routes for the User account:
 
   # SIGN UP FORM
+  get("/", { :controller => "user_authentication", :action => "index" })   
+
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD
   post("/insert_user", { :controller => "user_authentication", :action => "create"  })
@@ -86,4 +85,5 @@ Rails.application.routes.draw do
 
   #------------------------------
 
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
