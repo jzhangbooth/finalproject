@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all clients
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new client
+    </h2>
+
+    <form action="/insert_client" method="post">
+      <div>
+        <label for="client_name_box">
+          Client name
+        </label>
+
+        <input type="text" id="client_name_box" name="query_client_name">
+      </div>
+
+      <div>
+        <label for="client_email_box">
+          Client email
+        </label>
+
+        <input type="text" id="client_email_box" name="query_client_email">
+      </div>
+
+      <button>
+        Create client
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Client name
+        </th>
+
+        <th>
+          Client email
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_clients.each do |a_client| %>
+      <tr>
+        <td>
+          <%= a_client.id %>
+        </td>
+
+        <td>
+          <%= a_client.client_name %>
+        </td>
+
+        <td>
+          <%= a_client.client_email %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_client.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_client.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/clients/<%= a_client.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

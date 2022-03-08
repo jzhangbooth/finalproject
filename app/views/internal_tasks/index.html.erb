@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all internal tasks
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new internal task
+    </h2>
+
+    <form action="/insert_internal_task" method="post">
+      <div>
+        <label for="engagement_id_box">
+          Engagement
+        </label>
+
+        <input type="text" id="engagement_id_box" name="query_engagement_id">
+      </div>
+
+      <div>
+        <label for="client_id_box">
+          Client
+        </label>
+
+        <input type="text" id="client_id_box" name="query_client_id">
+      </div>
+
+      <div>
+        <label for="task_name_box">
+          Task name
+        </label>
+
+        <input type="text" id="task_name_box" name="query_task_name">
+      </div>
+
+      <div>
+        <label for="task_detail_box">
+          Task detail
+        </label>
+
+        <input type="text" id="task_detail_box" name="query_task_detail">
+      </div>
+
+      <button>
+        Create internal task
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Engagement
+        </th>
+
+        <th>
+          Client
+        </th>
+
+        <th>
+          Task name
+        </th>
+
+        <th>
+          Task detail
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_internal_tasks.each do |an_internal_task| %>
+      <tr>
+        <td>
+          <%= an_internal_task.id %>
+        </td>
+
+        <td>
+          <%= an_internal_task.engagement_id %>
+        </td>
+
+        <td>
+          <%= an_internal_task.client_id %>
+        </td>
+
+        <td>
+          <%= an_internal_task.task_name %>
+        </td>
+
+        <td>
+          <%= an_internal_task.task_detail %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_internal_task.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_internal_task.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/internal_tasks/<%= an_internal_task.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

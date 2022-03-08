@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Engagement #<%= @the_engagement.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/engagements">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_engagement/<%= @the_engagement.id %>">
+          Delete engagement
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Client
+      </dt>
+      <dd>
+        <%= @the_engagement.client_id %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_engagement.user_id %>
+      </dd>
+
+      <dt>
+        Engagement name
+      </dt>
+      <dd>
+        <%= @the_engagement.engagement_name %>
+      </dd>
+
+      <dt>
+        Engagement detail
+      </dt>
+      <dd>
+        <%= @the_engagement.engagement_detail %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_engagement.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_engagement.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit engagement
+    </h2>
+
+    <form action="/modify_engagement/<%= @the_engagement.id %>"  method="post" >
+      <div>
+        <label for="client_id_box">
+          Client
+        </label>
+
+        <input type="text" id="client_id_box" name="query_client_id" value="<%= @the_engagement.client_id %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_engagement.user_id %>">
+      </div>
+
+      <div>
+        <label for="engagement_name_box">
+          Engagement name
+        </label>
+
+        <input type="text" id="engagement_name_box" name="query_engagement_name" value="<%= @the_engagement.engagement_name %>">
+      </div>
+
+      <div>
+        <label for="engagement_detail_box">
+          Engagement detail
+        </label>
+
+        <input type="text" id="engagement_detail_box" name="query_engagement_detail" value="<%= @the_engagement.engagement_detail %>">
+      </div>
+
+      <button>
+        Update engagement
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

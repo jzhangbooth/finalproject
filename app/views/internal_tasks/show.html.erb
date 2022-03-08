@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Internal task #<%= @the_internal_task.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/internal_tasks">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_internal_task/<%= @the_internal_task.id %>">
+          Delete internal task
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Engagement
+      </dt>
+      <dd>
+        <%= @the_internal_task.engagement_id %>
+      </dd>
+
+      <dt>
+        Client
+      </dt>
+      <dd>
+        <%= @the_internal_task.client_id %>
+      </dd>
+
+      <dt>
+        Task name
+      </dt>
+      <dd>
+        <%= @the_internal_task.task_name %>
+      </dd>
+
+      <dt>
+        Task detail
+      </dt>
+      <dd>
+        <%= @the_internal_task.task_detail %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_internal_task.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_internal_task.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit internal task
+    </h2>
+
+    <form action="/modify_internal_task/<%= @the_internal_task.id %>"  method="post" >
+      <div>
+        <label for="engagement_id_box">
+          Engagement
+        </label>
+
+        <input type="text" id="engagement_id_box" name="query_engagement_id" value="<%= @the_internal_task.engagement_id %>">
+      </div>
+
+      <div>
+        <label for="client_id_box">
+          Client
+        </label>
+
+        <input type="text" id="client_id_box" name="query_client_id" value="<%= @the_internal_task.client_id %>">
+      </div>
+
+      <div>
+        <label for="task_name_box">
+          Task name
+        </label>
+
+        <input type="text" id="task_name_box" name="query_task_name" value="<%= @the_internal_task.task_name %>">
+      </div>
+
+      <div>
+        <label for="task_detail_box">
+          Task detail
+        </label>
+
+        <input type="text" id="task_detail_box" name="query_task_detail" value="<%= @the_internal_task.task_detail %>">
+      </div>
+
+      <button>
+        Update internal task
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

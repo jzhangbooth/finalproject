@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Client #<%= @the_client.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/clients">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_client/<%= @the_client.id %>">
+          Delete client
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Client name
+      </dt>
+      <dd>
+        <%= @the_client.client_name %>
+      </dd>
+
+      <dt>
+        Client email
+      </dt>
+      <dd>
+        <%= @the_client.client_email %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_client.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_client.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit client
+    </h2>
+
+    <form action="/modify_client/<%= @the_client.id %>"  method="post" >
+      <div>
+        <label for="client_name_box">
+          Client name
+        </label>
+
+        <input type="text" id="client_name_box" name="query_client_name" value="<%= @the_client.client_name %>">
+      </div>
+
+      <div>
+        <label for="client_email_box">
+          Client email
+        </label>
+
+        <input type="text" id="client_email_box" name="query_client_email" value="<%= @the_client.client_email %>">
+      </div>
+
+      <button>
+        Update client
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
