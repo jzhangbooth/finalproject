@@ -11,4 +11,8 @@
 #  engagement_id :integer
 #
 class InternalTask < ApplicationRecord
+
+  belongs_to(:client, { :required => true, :class_name => "Client", :foreign_key => "client_id" })
+  belongs_to(:engagement, { :required => true, :class_name => "Engagement", :foreign_key => "engagement_id" })
+
 end

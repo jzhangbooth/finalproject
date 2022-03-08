@@ -20,7 +20,14 @@ class InternalTasksController < ApplicationController
   def create
     the_internal_task = InternalTask.new
     the_internal_task.engagement_id = params.fetch("query_engagement_id")
-    the_internal_task.client_id = params.fetch("query_client_id")
+    if the_internal_task.engagement_id == nil
+    else
+      @matching_engagement = Engagement.where ({:id => the_internal_task.engagement_id})
+      @the_engagement = @matching_engagement.at(0)
+      @matching_client = Client.where({:id => @the_engagement.client_id})
+      @the_client = @matching_client.at(0)
+      the_internal_task.client_id = @the_client.id
+    end
     the_internal_task.task_name = params.fetch("query_task_name")
     the_internal_task.task_detail = params.fetch("query_task_detail")
 
@@ -28,7 +35,7 @@ class InternalTasksController < ApplicationController
       the_internal_task.save
       redirect_to("/internal_tasks", { :notice => "Internal task created successfully." })
     else
-      redirect_to("/internal_tasks", { :alert => internal_task.errors.full_messages.to_sentence })
+      redirect_to("/internal_tasks", { :notice => "Internal task failed to create successfully." })
     end
   end
 
@@ -45,7 +52,7 @@ class InternalTasksController < ApplicationController
       the_internal_task.save
       redirect_to("/internal_tasks/#{the_internal_task.id}", { :notice => "Internal task updated successfully."} )
     else
-      redirect_to("/internal_tasks/#{the_internal_task.id}", { :alert => internal_task.errors.full_messages.to_sentence })
+      redirect_to("/internal_tasks/#{the_internal_task.id}", { :alert => "Internal task failed to update successfully." })
     end
   end
 

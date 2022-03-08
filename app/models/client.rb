@@ -9,4 +9,10 @@
 #  updated_at   :datetime         not null
 #
 class Client < ApplicationRecord
+
+  has_many(:engagements, { :class_name => "Engagement", :foreign_key => "client_id", :dependent => :destroy })
+
+  has_many(:internal_tasks, { :class_name => "InternalTask", :foreign_key => "client_id", :dependent => :destroy })
+  
+
 end

@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
       the_client.save
       redirect_to("/clients", { :notice => "Client created successfully." })
     else
-      redirect_to("/clients", { :alert => client.errors.full_messages.to_sentence })
+      redirect_to("/clients", { :notice => "Client failed to create successfully." })
     end
   end
 
@@ -41,7 +41,7 @@ class ClientsController < ApplicationController
       the_client.save
       redirect_to("/clients/#{the_client.id}", { :notice => "Client updated successfully."} )
     else
-      redirect_to("/clients/#{the_client.id}", { :alert => client.errors.full_messages.to_sentence })
+      redirect_to("/clients/#{the_client.id}", { :alert => "Client failed to update successfully." })
     end
   end
 

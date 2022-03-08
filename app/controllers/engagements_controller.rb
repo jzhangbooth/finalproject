@@ -20,7 +20,7 @@ class EngagementsController < ApplicationController
   def create
     the_engagement = Engagement.new
     the_engagement.client_id = params.fetch("query_client_id")
-    the_engagement.user_id = params.fetch("query_user_id")
+    the_engagement.user_id = session.fetch(:user_id)
     the_engagement.engagement_name = params.fetch("query_engagement_name")
     the_engagement.engagement_detail = params.fetch("query_engagement_detail")
 
@@ -28,7 +28,7 @@ class EngagementsController < ApplicationController
       the_engagement.save
       redirect_to("/engagements", { :notice => "Engagement created successfully." })
     else
-      redirect_to("/engagements", { :alert => engagement.errors.full_messages.to_sentence })
+      redirect_to("/engagements", { :notice => "Engagement failed to create successfully." })
     end
   end
 
@@ -37,7 +37,7 @@ class EngagementsController < ApplicationController
     the_engagement = Engagement.where({ :id => the_id }).at(0)
 
     the_engagement.client_id = params.fetch("query_client_id")
-    the_engagement.user_id = params.fetch("query_user_id")
+    the_engagement.user_id = session.fetch(:user_id)
     the_engagement.engagement_name = params.fetch("query_engagement_name")
     the_engagement.engagement_detail = params.fetch("query_engagement_detail")
 
@@ -45,7 +45,7 @@ class EngagementsController < ApplicationController
       the_engagement.save
       redirect_to("/engagements/#{the_engagement.id}", { :notice => "Engagement updated successfully."} )
     else
-      redirect_to("/engagements/#{the_engagement.id}", { :alert => engagement.errors.full_messages.to_sentence })
+      redirect_to("/engagements/#{the_engagement.id}", { :alert => "Engagement failed to update successfully." })
     end
   end
 

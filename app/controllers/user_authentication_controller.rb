@@ -1,9 +1,20 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment this if you want to force users to sign in before any other actions
-  # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
+  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] }, raise: false)
 
   def sign_in_form
     render({ :template => "user_authentication/sign_in.html.erb" })
+  end
+
+  def index
+    @client_count = Client.count
+    @engagement_count = Engagement.count
+    @task_count = InternalTask.count 
+    if @current_user == nil
+      redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
+    else
+    render({ :template => "user_authentication/index.html.erb" })
+    end
   end
 
   def create_cookie
@@ -40,8 +51,8 @@ class UserAuthenticationController < ApplicationController
     @user = User.new
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
-    @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.username = params.fetch("query_username")
+    @user.password_confirmation = params.fetch("query_password_confirmation")
 
     save_status = @user.save
 
@@ -61,9 +72,9 @@ class UserAuthenticationController < ApplicationController
   def update
     @user = @current_user
     @user.email = params.fetch("query_email")
+    @user.username = params.fetch("query_username")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
-    @user.username = params.fetch("query_username")
     
     if @user.valid?
       @user.save
